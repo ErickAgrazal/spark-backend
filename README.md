@@ -14,4 +14,4 @@ After building the first time, we can use the container to compile and execute t
 1. Compile using docker: `docker run -v $(pwd):/code <name>:<version> mvn package`
    - Example: `docker run -v $(pwd):/code erickagrazal/spark:simple mvn package`
 2. Run using docker: `docker run -p 4567:4567 -v \$(pwd):/code <name>:<version> java -jar target/ApplicationMain-1.0.jar`
-   - Example: `docker run -p 4567:4567 -v \$(pwd):/code <name>:<version> java -jar target/ApplicationMain-1.0.jar`
+   - Example: `docker run -p 4567:4567 -v \$(pwd):/code erickagrazal/spark:simple java -jar target/ApplicationMain-1.0.jar`
