@@ -15,4 +15,4 @@ RUN ["mvn", "package"]
 
 EXPOSE 4567
 
-ENTRYPOINT ["java", "-jar", "target/ApplicationMain-1.0.jar"]
+# ENTRYPOINT ["java", "-jar", "target/ApplicationMain-1.0.jar"]

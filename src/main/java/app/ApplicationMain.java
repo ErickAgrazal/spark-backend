@@ -4,6 +4,6 @@ import static spark.Spark.*;
 
 public class ApplicationMain {
   public static void main(String[] args) {
-    get("/hello", (request, response) -> "world");
+    get("/hello", (request, response) -> "World! after change");
   }
 }
