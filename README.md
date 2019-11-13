@@ -5,7 +5,7 @@ Simple project that works as a bootstrap for a spark backend.
 ## Build
 
 1. Build the first time the container locally: `docker build --tag <name>:<version> .`
-   Example: `docker build --tag erickagrazal/spark:simple .`
+   - Example: `docker build --tag erickagrazal/spark:simple .`
 
 ## Run
 
