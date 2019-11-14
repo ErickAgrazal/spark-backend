@@ -2,26 +2,25 @@ package app;
 
 import static spark.Spark.*;
 import org.json.JSONObject;
-import app.Student;
+import app.Group;
 
 public class ApplicationMain {
   public static void main(String[] args) {
     // Initialize basic model
-    Student student = getDefaultStudent();
+    Group group = createGroup();
     get("/", (req, res) -> {
       res.type("application/json");
-      JSONObject jo = new JSONObject(student);
+      JSONObject jo = new JSONObject(group);
       return jo;
     });
   }
 
-  public static Student getDefaultStudent() {
-    Student student = new Student();
+  public static Group createGroup() {
+    Group group = new Group();
     int[] grades = new int[] { 100, 100 };
-    student.setName("Erick");
-    student.setAge(28);
-    student.setCareer("Ing. en sistemas");
-    student.setGrades(grades);
-    return student;
+    group.addStudent("Erick", 28, grades, "Ing. Sistemas");
+    group.addStudent("Yair", 27, grades, "Lo que sea");
+    group.addStudent("Iván", 25, grades, "Desarrollo");
+    return group;
   }
 }

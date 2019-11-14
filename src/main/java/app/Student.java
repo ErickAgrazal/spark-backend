@@ -1,7 +1,5 @@
 package app;
 
-import java.lang.reflect.Array;
-
 public class Student {
   String name;
   int age;
