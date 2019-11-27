@@ -7,7 +7,7 @@ import app.Student;
 public class Group {
   List<Student> students = new ArrayList<Student>();
 
-  public void addStudent(String _name, int _age, int[] _grades, String _career) {
+  public void addStudent(String _name, int _age, List<Integer> _grades, String _career) {
     Student student = new Student();
     student.setName(_name);
     student.setAge(_age);

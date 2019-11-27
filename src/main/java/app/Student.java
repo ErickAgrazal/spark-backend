@@ -1,10 +1,13 @@
 package app;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Student {
   String name;
   int age;
   String career;
-  int[] grades;
+  List<Integer> grades = new ArrayList<Integer>();
 
   /**
    * setName
@@ -38,7 +41,7 @@ public class Student {
    *
    * @param _grades
    */
-  public void setGrades(int[] _grades) {
+  public void setGrades(List<Integer> _grades) {
     grades = _grades;
   }
 
@@ -74,7 +77,7 @@ public class Student {
    *
    * @return
    */
-  public int[] getGrades() {
+  public List<Integer> getGrades() {
     return grades;
   }
 }
