@@ -24,5 +24,13 @@ public class ApplicationMain {
     post("/hola", (request, response) -> {
       return "Hola mundo desde el POST";
     });
+    get("/hola/json", (request, response) -> {
+      response.type("application/json");
+      return "{\"hola\": \"mundo\"}";
+    });
+    post("/hola/json", (request, response) -> {
+      response.type("application/json");
+      return request.body();
+    });
   }
 }
