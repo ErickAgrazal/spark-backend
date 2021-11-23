@@ -18,5 +18,11 @@ public class ApplicationMain {
     get("/hola", (request, response) -> {
       return "Hola mundo";
     });
+    get("/mundo", (request, response) -> {
+      return "Mundo hola";
+    });
+    post("/hola", (request, response) -> {
+      return "Hola mundo desde el POST";
+    });
   }
 }
