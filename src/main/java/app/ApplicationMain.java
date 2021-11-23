@@ -15,6 +15,8 @@ import org.apache.log4j.BasicConfigurator;
 
 public class ApplicationMain {
   public static void main(String[] args) {
-    // TODO
+    get("/hola", (request, response) -> {
+      return "Hola mundo";
+    });
   }
 }
