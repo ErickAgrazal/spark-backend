@@ -15,6 +15,7 @@ import org.apache.log4j.BasicConfigurator;
 
 public class ApplicationMain {
   public static void main(String[] args) {
+    // ==========================================
     get("/hola", (request, response) -> {
       return "Hola mundo";
     });
@@ -32,5 +33,19 @@ public class ApplicationMain {
       response.type("application/json");
       return request.body();
     });
+    // ==========================================
+    Student student = createStudent();
+    get("/estudiantes", (req, res) -> {
+      res.type("application/json");
+      JSONObject jo = new JSONObject(student);
+      return jo;
+    });
+  }
+
+  public static Student createStudent(){
+      Student student = new Student();
+      student.setName("Erick Agrazal");
+      student.setAge(10);
+      return student;
   }
 }
