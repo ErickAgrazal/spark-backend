@@ -34,18 +34,36 @@ public class ApplicationMain {
       return request.body();
     });
     // ==========================================
-    Student student = createStudent();
+    Group group = createGroup();
     get("/estudiantes", (req, res) -> {
       res.type("application/json");
-      JSONObject jo = new JSONObject(student);
+      JSONObject jo = new JSONObject(group);
       return jo;
     });
   }
 
-  public static Student createStudent(){
+  public static Group createGroup(){
+      Group group = new Group();
+      group.addStudent(createStudent("Erick Agrazal"));
+      group.addStudent(createStudent("Vicente Lopez"));
+      group.addStudent(createStudent("Rolando Ramos"));
+      group.addStudent(createStudent("Emir Salazar"));
+      return group;
+  }
+
+  public static Student createStudent(String _name){
       Student student = new Student();
-      student.setName("Erick Agrazal");
-      student.setAge(10);
+      List<Integer> grades = new ArrayList<Integer>();
+      student.setName(_name);
+      student.setAge(randomInt(20, 40));
+      grades.add(randomInt(80, 100));
+      grades.add(randomInt(80, 100));
+      grades.add(randomInt(80, 100));
+      student.setGrades(grades);
       return student;
+  }
+
+  public static int randomInt(int lower, int upper){
+      return (int)(Math.random() * ( upper - lower )) + lower;
   }
 }
