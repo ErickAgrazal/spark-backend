@@ -14,84 +14,56 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.BasicConfigurator;
 
 public class ApplicationMain {
-  static Logger logger = Logger.getLogger(ApplicationMain.class);
-
   public static void main(String[] args) {
-    // Set up a simple configuration that logs on the console.
-    BasicConfigurator.configure();
-    // Enable CORS
-    enableCors();
-    // Initialize basic model
+    // ==========================================
+    get("/hola", (request, response) -> {
+      return "Hola mundo";
+    });
+    get("/mundo", (request, response) -> {
+      return "Mundo hola";
+    });
+    post("/hola", (request, response) -> {
+      return "Hola mundo desde el POST";
+    });
+    get("/hola/json", (request, response) -> {
+      response.type("application/json");
+      return "{\"hola\": \"mundo\"}";
+    });
+    post("/hola/json", (request, response) -> {
+      response.type("application/json");
+      return request.body();
+    });
+    // ==========================================
     Group group = createGroup();
-
-    // Routes definition ====================
     get("/estudiantes", (req, res) -> {
       res.type("application/json");
       JSONObject jo = new JSONObject(group);
       return jo;
     });
-
-    post("/estudiantes", (req, res) -> {
-      res.type("application/json");
-      JSONObject body = new JSONObject(req.body());
-      List<Integer> grades = generateGrades();
-      group.addStudent(body.getString("name"), body.getInt("age"), grades, body.getString("career"));
-      JSONObject jo = new JSONObject(group);
-      return jo;
-    });
-    // ========================================
   }
 
-  public static void enableCors() {
-    options("/*", (request, response) -> {
-
-      String accessControlRequestHeaders = request.headers("Access-Control-Request-Headers");
-      if (accessControlRequestHeaders != null) {
-        response.header("Access-Control-Allow-Headers", accessControlRequestHeaders);
-      }
-
-      String accessControlRequestMethod = request.headers("Access-Control-Request-Method");
-      if (accessControlRequestMethod != null) {
-        response.header("Access-Control-Allow-Methods", accessControlRequestMethod);
-      }
-
-      return "OK";
-    });
-
-    before((request, response) -> response.header("Access-Control-Allow-Origin", "*"));
+  public static Group createGroup(){
+      Group group = new Group();
+      group.addStudent(createStudent("Erick Agrazal"));
+      group.addStudent(createStudent("Vicente Lopez"));
+      group.addStudent(createStudent("Rolando Ramos"));
+      group.addStudent(createStudent("Emir Salazar"));
+      return group;
   }
 
-  public static Group createGroup() {
-    // Creating a new group
-    Group group = new Group();
-
-    // Genereting grades
-    List<Integer> gradesStudent1 = generateGrades();
-    List<Integer> gradesStudent2 = generateGrades();
-    List<Integer> gradesStudent3 = generateGrades();
-    List<Integer> gradesStudent4 = generateGrades();
-
-    // Adding students to the group
-    group.addStudent("Erick", 28, gradesStudent1, "Ing. Sistemas");
-    group.addStudent("Yair", 27, gradesStudent2, "Ing. Civil");
-    group.addStudent("Iván", 25, gradesStudent3, "Desarrollo de Software");
-    group.addStudent("Roody", 21, gradesStudent4, "Doctor en medicina");
-
-    return group;
+  public static Student createStudent(String _name){
+      Student student = new Student();
+      List<Integer> grades = new ArrayList<Integer>();
+      student.setName(_name);
+      student.setAge(randomInt(20, 40));
+      grades.add(randomInt(80, 100));
+      grades.add(randomInt(80, 100));
+      grades.add(randomInt(80, 100));
+      student.setGrades(grades);
+      return student;
   }
 
-  public static List<Integer> generateGrades() {
-    List<Integer> grades = new ArrayList<Integer>();
-    grades.add(generatePseudoRandomGrade());
-    grades.add(generatePseudoRandomGrade());
-    grades.add(generatePseudoRandomGrade());
-    grades.add(generatePseudoRandomGrade());
-    return grades;
-  }
-
-  public static int generatePseudoRandomGrade() {
-    int upper = 100;
-    int lower = 80;
-    return (int) (Math.random() * (upper - lower)) + lower;
+  public static int randomInt(int lower, int upper){
+      return (int)(Math.random() * ( upper - lower )) + lower;
   }
 }

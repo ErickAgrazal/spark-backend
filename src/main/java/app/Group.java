@@ -1,26 +1,20 @@
 package app;
 
-import java.util.List;
 import java.util.ArrayList;
-import app.Student;
+import java.util.List;
 
 public class Group {
-  List<Student> students = new ArrayList<Student>();
+    List<Student> students = new ArrayList<Student>();
 
-  public void addStudent(String _name, int _age, List<Integer> _grades, String _career) {
-    Student student = new Student();
-    student.setName(_name);
-    student.setAge(_age);
-    student.setCareer(_career);
-    student.setGrades(_grades);
-    students.add(student);
-  }
+    public void addStudent(Student _student){
+        students.add(_student);
+    }
 
-  public List<Student> getGroup() {
-    return students;
-  }
+    public List<Student> getGroup(){
+        return students;
+    }
 
-  public int getCount() {
-    return students.size();
-  }
+    public int getCount(){
+        return students.size();
+    }
 }
